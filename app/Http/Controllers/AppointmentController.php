@@ -22,7 +22,8 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('citas.index');
+        $records = Appointment::where('estado',0);
+        return view('citas.index', compact('records'));
     }
 
     /**

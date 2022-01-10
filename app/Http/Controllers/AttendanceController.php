@@ -14,7 +14,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        return view('horarios.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('horarios.create');
     }
 
     /**

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     protected $table = 'appointments';
+    protected $with = 'patient';
     protected $fillable = [        
         'date_of_treatment',
         'start_time',
@@ -20,4 +21,8 @@ class Appointment extends Model
     protected $casts = [
         'date_of_treatment' => 'date',
     ];
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }

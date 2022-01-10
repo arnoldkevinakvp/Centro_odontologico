@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home','App\Http\Controllers\HomeController@index')->name('home');
+
+//Ruta para los permisos de usuarios
+Route::get('/admin',[AdminController::class,'index'])
+    ->middleware('auth')
+    ->name('admin.index');
 
 //Rutas para los pacientes
 Route::get('patients', 'App\Http\Controllers\PatientController@index')->name('patients.index');
@@ -51,3 +62,21 @@ Route::get('orders/tables', 'App\Http\Controllers\OrderPaymentController@tables'
 
 Route::get('Report','App\Http\Controllers\DocumentController@order')->name('reports.orders');
 Route::get('Report/orders/pdf', 'App\Http\Controllers\DocumentController@pdf')->name('reports.orders_pdf');
+
+//Rutas para hosarios
+
+Route::get('Horarios','App\Http\Controllers\AttendanceController@index')->name('horarios.index');
+Route::get('Horarios/create', 'App\Http\Controllers\AttendanceController@create')->name('horarios.create');
+
+//Rutas para historias clínicas
+Route::get('Historia','App\Http\Controllers\ClinicHistoryController@index')->name('historia_clinica.index');
+Route::post('Historia/create/historia','App\Http\Controllers\ClinicHistoryController@store');
+Route::get('Historia/create/{id}','App\Http\Controllers\ClinicHistoryController@history')->name('historia_clinica.create');
+Route::get('Historia/patient/{id}','App\Http\Controllers\ClinicHistoryController@patient');
+Route::get('Historia/diagnostic/{id}','App\Http\Controllers\ClinicHistoryController@diagnostic');
+Route::get('Historia/tables','App\Http\Controllers\ClinicHistoryController@table');
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

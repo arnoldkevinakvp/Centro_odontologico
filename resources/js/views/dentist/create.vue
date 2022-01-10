@@ -145,19 +145,13 @@
                 console.log(this.form)
                 await this.$http.post(`/${this.resource}`, this.form)
                     .then(response => {
-                        if (response.data.success) {
-                            this.$message.success(response.data.message)
-                            this.close()
-                        } else {
-                            this.$message.error(response.data.message)
-                        }
+                        console.log(response)
+                        this.close()
+                        this.$swal("Odontòlogo registrado exitosamente")
                     })
                     .catch(error => {
                         console.log(error)
-                    })
-                    .then(() => {
-                        this.loading_submit = false
-                    })
+                    });
             },
             close() {
                 this.initForm()

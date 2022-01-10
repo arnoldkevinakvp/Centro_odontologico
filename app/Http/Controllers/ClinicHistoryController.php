@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clinic_history;
+use App\Models\Diagnostic_detail;
+use App\Models\Patient;
+use App\Models\Appointment;
+use App\Models\Odontogram;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClinicHistoryController extends Controller
 {
@@ -14,7 +19,7 @@ class ClinicHistoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('historia_clinica.index');
     }
 
     /**
@@ -22,11 +27,28 @@ class ClinicHistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function history($id){
+        $records = $id;
+        return view('historia_clinica.create',compact('records'));
+    }
     public function create()
     {
-        //
+                
+    }
+    public function patient($id){
+        $records = Patient::where('id',$id)->get();
+        return compact('records');
     }
 
+    public function diagnostic($id){
+        $idHistory = Clinic_history::where('patient_id',$id)->first();
+        
+        return compact('idHistory');
+    }
+    public function table(){
+        $records = Appointment::where('estado',0)->get();
+        return compact('records');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -35,7 +57,26 @@ class ClinicHistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $patient_id = $request['patient_id'];
+        DB::connection('pgsql')->transaction(function () use ($request) {
+            $value = [
+                'FechaRegistro' => $request['FechaApertura']
+            ];
+            $this->Odontogram = Odontogram::create($value);
+        });
+        DB::connection('pgsql')->transaction(function () use ($request) {
+            $values = [
+                'FechaApertura' => $request['FechaApertura'],
+                'Description' => $request['Description'],
+                'patient_id' => $request['patient_id'],
+                'odontogram_id' => $this->Odontogram->id,
+            ];
+            $this->Clinic_history = Clinic_history::create($values);
+        });
+        $patient = Patient::findOrFail($patient_id);
+        $patient->historia  = 1;
+        $patient->save();
+
     }
 
     /**

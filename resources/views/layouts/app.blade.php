@@ -24,7 +24,7 @@
 	<script defer src="{{ asset('js/app.js') }}"></script>
 	@yield('script')
 </head>
-<body>
+<body data-background-color="bg3">
 	
 		<div class="wrapper">
 			@include('layouts.partials.header')

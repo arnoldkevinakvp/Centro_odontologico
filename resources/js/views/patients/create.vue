@@ -47,7 +47,7 @@
                                             <label>Dirección</label>
                                             <input v-model="form.address" name="apellidop" type="text" class="form-control" required placeholder="Ingrese dirección">
                                         </div>
-                                    </div>                                
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group form-group-default">
                                             <label>Fecha de nacimiento</label>
@@ -144,24 +144,18 @@
                 console.log(this.form)
                 await this.$http.post(`/${this.resource}`, this.form)
                     .then(response => {
-                        if (response.data.success) {
-                            this.$message.success(response.data.message)
-                            this.close()
-                        } else {
-                            this.$message.error(response.data.message)
-                        }
+                        console.log(response)
+                        this.close()
+                        this.$swal("Paciente registrado exitosamente")
                     })
                     .catch(error => {
-                        
-                    })
-                    .then(() => {
-                        this.loading_submit = false
-                    })
+                        console.log(error)
+                    });
             },
             close() {
                 console.log("xddd")
                 this.initForm()
-            },
+            },            
         }
     }
 </script>

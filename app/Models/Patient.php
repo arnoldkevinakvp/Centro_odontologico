@@ -24,4 +24,17 @@ class Patient extends Model
     {
         return $this->hasMany(Order_payment::class,  'patient_id');
     }
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class,  'patient_id');
+    }
+    public function clinic_history()
+    {
+        return $this->hasMany(Clinic_history::class,  'patient_id');
+    }
+    public function document()
+    {
+        return $this->hasMany(Document::class,  'patient_id');
+    }
+    
 }

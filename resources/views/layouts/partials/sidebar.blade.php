@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div class="sidebar sidebar-style-2">			
+<div class="sidebar sidebar-style-2" data-background-color="dark2">			
 	<div class="sidebar-wrapper scrollbar scrollbar-inner">
 		<div class="sidebar-content">
 			<div class="user">
@@ -117,23 +117,6 @@
 					</div>
 				</li>
 				<li class="nav-item">
-					<a data-toggle="collapse" href="#tables">
-						<i class="fas fa-table"></i>
-						<p>Áreas médicas</p>
-						<span class="caret"></span>
-					</a>
-					<div class="collapse" id="tables">
-						<ul class="nav nav-collapse">
-							<li>
-								<a href="specialty.php">
-									<span class="sub-item">Mostrar</span>
-								</a>
-							</li>
-							
-						</ul>
-					</div>
-				</li>
-				<li class="nav-item">
 					<a data-toggle="collapse" href="#Horarios">
 					<i class="fa fa-calendar"></i>
 						<p>Horarios</p>
@@ -142,8 +125,13 @@
 					<div class="collapse" id="Horarios">
 						<ul class="nav nav-collapse">
 							<li>
-								<a href="specialty.php">
+								<a href="{{route('horarios.index')}}">
 									<span class="sub-item">Mostrar</span>
+								</a>
+							</li>
+							<li>
+								<a href="{{route('horarios.create')}}">
+									<span class="sub-item">Nuevo</span>
 								</a>
 							</li>
 							
@@ -159,28 +147,10 @@
 					<div class="collapse" id="Historia">
 						<ul class="nav nav-collapse">
 							<li>
-								<a href="specialty.php">
+								<a href="{{route('historia_clinica.index')}}">
 									<span class="sub-item">Mostrar</span>
 								</a>
 							</li>
-							
-						</ul>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a data-toggle="collapse" href="#Odontograma">
-					<i class="fa fa-list-alt"></i>
-						<p>Odontograma</p>
-						<span class="caret"></span>
-					</a>
-					<div class="collapse" id="Odontograma">
-						<ul class="nav nav-collapse">
-							<li>
-								<a href="specialty.php">
-									<span class="sub-item">Mostrar</span>
-								</a>
-							</li>
-							
 						</ul>
 					</div>
 				</li>

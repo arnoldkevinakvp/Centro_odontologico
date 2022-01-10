@@ -150,7 +150,8 @@
                 this.$http.post(`/${this.resource}`, this.form)
                     .then(response => {
                         console.log(response)
-                        this.$swal("Registrado","Se registrò la cita","success")
+                        this.$swal("Registrado","Se registrò la cita")
+                        this.close()
                     })
                     .catch(error => {
                         console.log(error)
@@ -159,7 +160,6 @@
             saveOrder(){
                 this.$http.post(`/orders`, this.orders)
                     .then(response => {
-                        this.$swal("Registrado","Se registrò la orden de pago","success")
                     })
                     .catch(error => {
                         console.log(error)

@@ -17,12 +17,13 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('patient_id');
-            $table->unsignedInteger('dentist_id');
+            $table->unsignedInteger('dentist_id')->nullable();
             $table->date('date_of_treatment');
             $table->time('start_time');
             $table->time('end_time');
-            $table->string('description');
-            $table->decimal('monto',12,2);
+            $table->string('description')->nullable();
+            $table->decimal('monto',12,2)->nullable();
+            $table->integer('estado')->default(0);
             $table->timestamps();
 
             $table->foreign('dentist_id')->references('id')->on('dentists');
