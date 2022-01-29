@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Number;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -13,11 +14,19 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
         return view('patients.index');
     }
-
+    public function document(){
+        $document = Number::all();
+        return compact('document');
+    }
     /**
      * Show the form for creating a new resource.
      *

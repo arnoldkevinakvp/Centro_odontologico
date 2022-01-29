@@ -8,6 +8,7 @@ use App\Models\Document_type;
 use App\Models\Method_type;
 use App\Models\Payment_method_type;
 use App\Models\Order_payment;
+use App\Models\Appointment;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Serie;
 use Illuminate\Http\Request;
@@ -33,6 +34,16 @@ class DocumentController extends Controller
     {
         return view('documents.create');
     }
+
+    public function citas(){
+        return view('reports.citas');
+    }
+
+    public function cita(){
+        $records = Appointment::where('estado',0)->get();
+        return compact('records');
+    }
+
     public function tables(){
         $customers = Patient::all();
         $series = Serie::all();

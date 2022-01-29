@@ -129,11 +129,7 @@
 									<span class="sub-item">Mostrar</span>
 								</a>
 							</li>
-							<li>
-								<a href="{{route('horarios.create')}}">
-									<span class="sub-item">Nuevo</span>
-								</a>
-							</li>
+							
 							
 						</ul>
 					</div>
@@ -199,7 +195,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="specialty.php">
+								<a href="{{route('reports.citas')}}">
 									<span class="sub-item">Citas</span>
 								</a>
 							</li>
