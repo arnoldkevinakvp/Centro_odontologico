@@ -9,6 +9,7 @@ use App\Models\Method_type;
 use App\Models\Payment_method_type;
 use App\Models\Order_payment;
 use App\Models\Appointment;
+use App\Models\Currency_type;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Serie;
 use Illuminate\Http\Request;
@@ -50,7 +51,8 @@ class DocumentController extends Controller
         $payment_method_types = Payment_method_type::all();
         $method_types = Method_type::all();
         $document_types = Document_type::all();
-        return compact ( 'customers','series','payment_method_types','method_types','document_types');
+        $currency_types = Currency_type::all();
+        return compact ( 'customers','currency_types','series','payment_method_types','method_types','document_types');
     }
     /**
      * Store a newly created resource in storage.

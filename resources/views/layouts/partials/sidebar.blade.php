@@ -172,6 +172,27 @@
 					</div>
 				</li>
 				<li class="nav-item">
+					<a data-toggle="collapse" href="#Productos">
+					<i class="fa fa-balance-scale"></i>
+						<p>Productos</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="Productos">
+						<ul class="nav nav-collapse">
+							<li>
+								<a href="{{route('items.index')}}">
+									<span class="sub-item">Mostrar</span>
+								</a>
+							</li>
+							<li>
+								<a href="{{route('items.create')}}">
+									<span class="sub-item">Nuevo</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav-item">
 					<a data-toggle="collapse" href="#Reportes">
 					<i class="fa fa-file-pdf"></i>
 						<p>Reportes</p>

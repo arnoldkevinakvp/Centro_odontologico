@@ -49,7 +49,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Fecha de emisión</label>
-                                            <input v-model="form.date_of_issue" type="date" class="form-control" id="datepicker" name="datepicker">
+                                            <input v-model="form.date_of_issue" type="date" class="form-control" id="datepicker" name="datepicker" @change="RateByDate">
                                         </div>
                                     </div>                                
                                     <div class="col-md-3">
@@ -366,7 +366,7 @@
 </template>
 <script>
     import DocumentFormPerson from './pagos/pagos.vue'
-    //import {functions, exchangeRate} from '../../../mixins/functions'
+    import {functions, exchangeRate} from '../../mixins/functions'
     import moment from 'moment'
     export default {
         components: {DocumentFormPerson},
@@ -379,6 +379,7 @@
                 form: {},
                 document_types: [],
                 series: [],
+                currency_types: [],
                 all_series: [],
                 payment_method_types: [],
                 method_types: [],
@@ -442,19 +443,16 @@
                     this.form.currency_type_id = (this.currency_types.length > 0)?this.currency_types[0].id:null;
                     this.form.document_type_id = (this.document_types.length > 0)?this.document_types[0].id:null;
                     this.filterSeries();
-                    //this.RateByDate();
+                    this.RateByDate();
                 });
             },
-            RateByDate() {
-              let minDate = moment().subtract(2, 'days')
-              if(moment(this.form.date_of_issue) < minDate ) {
-                this.$message.error('No puede seleccionar una fecha menor a 2 días.');
-                this.dateValid=false
-              } else { this.dateValid = true }
-                this.form.date_of_due = this.form.date_of_issue
-                //this.searchExchangeRateByDate(this.form.date_of_issue).then(response => {
-                //    this.form.exchange_rate_sale = response
-                //})
+            changeCurrencyType(){
+
+            },
+            async RateByDate() {
+              
+                let response = await this.$http.get(`/Service/exchange_rate/${this.form.date_of_issue}`)
+                this.form.exchange_rate_sale = response.data.exchange.venta
             },
             addPayments(){
                 
@@ -472,7 +470,6 @@
             },
             async submit() {
                 this.loading_submit = true
-                console.log(this.form)
                 await this.$http.post(`/${this.resource}`, this.form)
                     .then(response => {
                         if (response.data.success) {
@@ -490,7 +487,6 @@
                     })
             },
             close() {
-                console.log("xddd")
                 this.initForm()
             },
         }

@@ -46,6 +46,7 @@
                                                     <input v-model="form.number"  type="text" required class="form-control" maxlength="8" placeholder="Ingrese dni" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                                                     <div class="input-group-prepend">
                                                         <button class="btn-black btn-border" type="button" @click.prevent="searchPatient">
+                                                            <span class="spinner-border spinner-border-sm" v-if="enabled_spinner"></span>
                                                             RENIEC
                                                         </button>
                                                     </div>
@@ -61,6 +62,7 @@
                                                     <input v-model="form.number"  type="text" required class="form-control" maxlength="11" placeholder="Ingrese ruc" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                                                     <div class="input-group-prepend">
                                                         <button class="btn-black btn-border" type="button" @click.prevent="searchPatient">
+                                                            <span class="spinner-border spinner-border-sm" v-if="enabled_spinner"></span>
                                                             SUNAT
                                                         </button>
                                                     </div>
@@ -151,6 +153,7 @@
                 errors: {},
                 form: {},
                 enabled_dni: true,
+                enabled_spinner: false,
                 enabled_ruc: false,
                 document_types: [],
             }
@@ -198,9 +201,11 @@
                 this.form.name = nombres
                 console.log(this.form.tipo)
                 if(this.form.tipo=='6'){
+                    this.enabled_spinner= true
                     identity_document_type_name = 'ruc'
                     let response = await this.$http.get(`/Service/${identity_document_type_name}/${this.form.number}`)
                     console.log(response)
+                    this.enabled_spinner=false
                     nombres = response.data.person.razonSocial
                     this.form.address = response.data.person.direccion
                     this.form.name = nombres
@@ -211,9 +216,11 @@
                     }
                 }
                 if(this.form.tipo=='1'){
+                    this.enabled_spinner= true
                     identity_document_type_name = 'dni'
                     let response = await this.$http.get(`/Service/${identity_document_type_name}/${this.form.number}`)
                     console.log(response)
+                    this.enabled_spinner=false
                     nombres = response.data.person.apellidoPaterno+' '+response.data.person.apellidoMaterno+' '+response.data.person.nombres
                     this.form.name = nombres
                         console.log(nombres)
@@ -241,7 +248,7 @@
                     this.enabled_dni = false
                     this.enabled_ruc = true
                 }
-                
+                this.form.number = ''
             },
             close() {
                 console.log("xddd")

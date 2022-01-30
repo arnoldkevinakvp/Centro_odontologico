@@ -81,7 +81,12 @@ Route::get('Historia/diagnostic/{id}','App\Http\Controllers\ClinicHistoryControl
 Route::get('Historia/tables','App\Http\Controllers\ClinicHistoryController@table');
 
 //Rutas para servicios
+Route::get('Service/exchange_rate/{date}', 'App\Http\Controllers\ServiceController@exchangeRateTest');
 Route::get('Service/{type}/{number}','App\Http\Controllers\ServiceController@service');
-Route::get('services/exchange_rate/{date}', 'Tenant\Api\ServiceController@exchangeRateTest');
 
-
+//Ruta para items
+Route::get('Items','App\Http\Controllers\ItemController@index')->name('items.index');
+Route::get('Items/create', 'App\Http\Controllers\ItemController@create')->name('items.create');
+Route::get('Items/table', 'App\Http\Controllers\ItemController@table');
+Route::get('Items/tables', 'App\Http\Controllers\ItemController@tables');
+Route::post('Items', 'App\Http\Controllers\ItemController@store');

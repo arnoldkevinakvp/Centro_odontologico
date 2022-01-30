@@ -5,6 +5,10 @@ namespace Modules\Services\Http\Controllers;
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use App\Models\Exchange_rate;
+use Exception;
+use Carbon\Carbon;
 
 class ServiceController extends Controller
 {
@@ -18,4 +22,12 @@ class ServiceController extends Controller
         $person = (object) json_decode($res);
         return compact('person');
     }
+    public function exchangeRateTest($date)
+    {
+        $cambio = Http::get('https://api.apis.net.pe/v1/tipo-cambio-sunat?fecha='.$date.'');
+        $exchange = (object) json_decode($cambio);
+        return compact('exchange');
+    }
+    
+
 }
