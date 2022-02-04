@@ -30,50 +30,64 @@
 </head>
 <body>
     <div class="wrapper">
-        @include('layouts.partials.header')
+            @include('layouts.partials.header')
 			@include('layouts.partials.sidebar')
             <div class="main-panel">
                 <div class="content">
-                    <div>
-                        sadsadsadsa
+                    <div class="page-inner">
+                        <div class="page-header">
+                            
+                        </div>
                     </div>
-                    <div>
-                        xczzxcxz
-                    </div>
-                    <div>
-                        sdcxcxcxz
-                        <br><br>
-                    </div>
-                    <!-- Agregar Nuevos Registros -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Launch demo modal
-                    </button>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="card">
+                                <div class="card-header">
+                                    <canvas id="myChart" ></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        
                 </div>
             </div>
     </div>
-    
-
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['GUERRA AVALOS ALEXANDRA YESABELLA','SEGURA PUMA LUIS ALBERTO','ESQUIVEL GUTIERREZ LOLA'],
+            datasets: [{
+                label: '# of Votes',
+                data: [3,2,4],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 </body>
 <script src="../../Atlantis/js/core/jquery.3.2.1.min.js"></script>
 <script src="../../Atlantis/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
@@ -89,7 +103,6 @@
 <script src="../../Atlantis/js/plugin/datatables/datatables.min.js"></script>
 <script src="../../Atlantis/js/atlantis.min.js"></script>
 <script src="../../Atlantis/js/plugin/select2.full.min.js"></script>
-<style>
-    
-</style>
+
+
 </html>

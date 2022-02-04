@@ -110,15 +110,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Tipo Paciente</label>
-                                            <select v-model="form.tratamiento" class="form-control" name="tratamiento">
-                                                <option value=""></option>
-                                                <option value="Tratamiento">Tratamiento</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Email</label>
@@ -144,6 +136,7 @@
     </form>
 </template>
 <script>
+    import moment from 'moment'
     
     export default {
         data(){
@@ -175,6 +168,7 @@
                     sexo: null,
                     tipo: null,
                     tratamiento: null,
+                    fecha: moment().format('YYYY-MM-DD'),
                 }
                 this.getRecords();
             },

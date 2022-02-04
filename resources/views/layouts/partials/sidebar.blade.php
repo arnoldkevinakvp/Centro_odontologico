@@ -147,6 +147,11 @@
 									<span class="sub-item">Mostrar</span>
 								</a>
 							</li>
+							<li>
+								<a href="{{route('historia_clinica.busqueda')}}">
+									<span class="sub-item">Busqueda</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>

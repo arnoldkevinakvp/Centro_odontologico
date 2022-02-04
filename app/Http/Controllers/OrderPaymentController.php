@@ -46,6 +46,10 @@ class OrderPaymentController extends Controller
         $orders = Order_payment::all();
         return compact('orders');
     }
+
+    public function time(){
+        
+    }
     /**
      * Display the specified resource.
      *

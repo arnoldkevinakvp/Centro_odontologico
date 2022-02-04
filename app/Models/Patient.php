@@ -16,9 +16,11 @@ class Patient extends Model
         'telephone',
         'nacimiento',
         'sexo',
+        'fecha',
     ];
     protected $casts = [
         'nacimiento' => 'date',
+        'fecha' => 'date',
     ];
     public function order_payments()
     {

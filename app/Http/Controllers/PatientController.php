@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\Number;
 use Illuminate\Http\Request;
@@ -14,15 +15,32 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
         return view('patients.index');
     }
+
+    public function buscador($request){
+        $mayuscula = strtoupper($request);
+        $patients = Patient::where('name','LIKE','%'.$mayuscula.'%')->get();
+        return compact('patients');
+    }
+    public function buscadores($request){
+        $patients = Patient::where('number','LIKE','%'.$request.'%')->get();
+        return compact('patients');
+    }
+
+    // public function report($d_start,$d_end)
+    // {
+    //     $pacientes = Appointment::whereBetween('fecha', [$d_start, $d_end])->get();
+
+    // }
+
     public function document(){
         $document = Number::all();
         return compact('document');

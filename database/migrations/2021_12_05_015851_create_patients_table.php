@@ -27,6 +27,7 @@ class CreatePatientsTable extends Migration
             $table->float('edad')->nullable();
             $table->string('sexo');
             $table->integer('historia')->default(0);
+            $table->date('fecha')->nullable();
             $table->timestamps();
         });
     }

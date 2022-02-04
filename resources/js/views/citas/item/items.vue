@@ -38,21 +38,18 @@
                             <div class="form-group">
                                 <label>Cantidad</label>
                                 <input v-model="form.quantity" @input="calculateQuantity" ref="inputQuantity" class="form-control">
-                                </input>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Precio Unitario</label>
                                 <input v-model="form.unit_price_value" @input="calculateQuantity" ref="inputQuantity" class="form-control">
-                                </input>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Total</label>
                                 <input v-model="readonly_total" ref="inputQuantity" class="form-control">
-                                </input>
                             </div>
                         </div>
                     </div>

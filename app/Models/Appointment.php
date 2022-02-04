@@ -9,7 +9,7 @@ class Appointment extends Model
 {
     protected $table = 'appointments';
     protected $with = ['patient','items'];
-    protected $fillable = [        
+    protected $fillable = [
         'date_of_treatment',
         'start_time',
         'end_time',

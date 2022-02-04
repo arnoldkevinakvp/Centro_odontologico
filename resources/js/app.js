@@ -44,6 +44,7 @@
  //Vistas para historia clínica
  Vue.component('historia-index', require('./views/historia_clinica/index.vue').default);
  Vue.component('historia-create', require('./views/historia_clinica/create.vue').default);
+ Vue.component('historia-busqueda', require('./views/historia_clinica/busqueda.vue').default);
  
   //Vistas para historia clínica
   Vue.component('horarios-index', require('./views/horarios/index.vue').default);

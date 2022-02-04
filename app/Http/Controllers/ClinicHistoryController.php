@@ -40,6 +40,12 @@ class ClinicHistoryController extends Controller
         return compact('records');
     }
 
+   
+
+    public function busqueda(){
+        return view('historia_clinica.busqueda');
+    }
+
     public function diagnostic($id){
         $idHistory = Clinic_history::where('patient_id',$id)->first();
         

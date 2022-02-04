@@ -38,6 +38,29 @@ class AppointmentController extends Controller
         return view('citas.create');
     }
 
+    public function reports($d_start, $d_end)
+    {
+            $appointment_items = DB::table('appointment_items')
+            ->join('appointments','appointments.id','=','appointment_items.appointment_id')
+            ->whereBetween('appointments.date_of_treatment', [$d_start, $d_end])->get();
+        
+        
+        return $appointment_items;
+    }
+    // public function testRegistrarCita()
+    // {
+    //     $this->withoutExceptionHandling();
+    //     $response=$this->post('/citas',[
+    //         'date_of_treatment' => '2020-02-05',
+    //         'start_time' => '10:15:00',
+    //         'end_time' => '10:30:00',
+    //         'monto' => '35',
+    //         'patient_id' => '1',
+    //         'dentist_id' => '1',
+    //     ]);
+    //     $response->assertOK();
+    // }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -46,49 +69,21 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-
         DB::connection('pgsql')->transaction(function () use ($request) {
             $value = [
                 'date_of_treatment' => $request['date_of_treatment'],
                 'start_time' => $request['start_time'],
                 'end_time' => $request['end_time'],
-                'description' => $request['description'],
                 'monto' => $request['monto'],
                 'patient_id' => $request['patient_id'],
                 'dentist_id' => $request['dentist_id'],
             ];
             $this->Appointment = Appointment::create($value);
-
             foreach ($request['item'] as $row)
             {
-                //$this->Appointment->items()->create($row);
-                $id = [];
                 $value2 = [
                     'appointment_id' => $this->Appointment->id,
                     'item_id' => $row['item_id'],
-                    // 'item' => [
-                    //     'amount_plastic_bag_taxes' => $row['item']['amount_plastic_bag_taxes'],
-                    //     'currency_type_id' => $row['item']['currency_type_id'],
-                    //     'date_of_due' => $row['item']['date_of_due'],
-                    //     'description' => $row['item']['description'],
-                    //     'has_igv' => $row['item']['has_igv'],
-                    //     'has_isc' => $row['item']['has_isc'],
-                    //     'has_plastic_bag_taxes' => $row['item']['has_plastic_bag_taxes'],
-                    //     'id' => $row['item']['id'],
-                    //     'model' => $row['item']['model'],
-                    //     'name' => $row['item']['name'],
-                    //     'purchase_affectation_igv_type_id' => $row['item']['purchase_affectation_igv_type_id'],
-                    //     'purchase_unit_price' => $row['item']['purchase_unit_price'],
-                    //     'sale_affectation_igv_type_id' => $row['item']['sale_affectation_igv_type_id'],
-                    //     'sale_unit_price' => $row['item']['sale_unit_price'],
-                    //     'status' => $row['item']['status'],
-                    //     'stock' => $row['item']['stock'],
-                    //     'stock_min' => $row['item']['stock_min'],
-                    //     'suggested_price' => $row['item']['suggested_price'],
-                    //     'unit_type_id' => $row['item']['unit_type_id'],
-                    //     'warehouse_id' => $row['item']['warehouse_id'],
-                        
-                    // ],
                     'quantity' => $row['quantity'],
                     'unit_value' => $row['unit_value'],
                     'affectation_igv_type_id' => $row['affectation_igv_type_id'],
@@ -110,7 +105,6 @@ class AppointmentController extends Controller
                 ];
                 $this->Appointment_item = Appointment_item::create($value2);
             }
-            
         });
     }
 
@@ -130,6 +124,16 @@ class AppointmentController extends Controller
         $dentist = Dentist::all();
         return compact ( 'customers','dentist');
     }
+
+    public function table(){
+        $records = Appointment::all();
+        return compact ( 'records');
+    }
+    public function buscar($id){
+        $records = Appointment::where('id',$id)->get();
+        return compact ( 'records');
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -163,4 +167,10 @@ class AppointmentController extends Controller
     {
         //
     }
+
+    
+
+
+
+
 }

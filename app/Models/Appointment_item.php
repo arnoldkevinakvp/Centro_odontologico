@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment_item extends Model
 {
-    protected $with = ['affectation_igv_type'];
+    protected $with = [];
     public $timestamps = false;
 
     protected $fillable = [
@@ -40,11 +40,6 @@ class Appointment_item extends Model
         'discounts',
         'total_plastic_bag_taxes',
     ];
-    
-    public function appointment()
-    {
-        return $this->belongsTo(Appointment::class);
-    }
     
     public function relation_item()
     {

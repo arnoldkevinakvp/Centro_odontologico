@@ -31,6 +31,8 @@ Route::get('patients', 'App\Http\Controllers\PatientController@index')->name('pa
 Route::get('patients/create', 'App\Http\Controllers\PatientController@create')->name('patients.create');
 Route::post('patients', 'App\Http\Controllers\PatientController@store');
 Route::get('patients/tables', 'App\Http\Controllers\PatientController@tables');
+Route::get('patients/buscador/{filtro}', 'App\Http\Controllers\PatientController@buscador');
+Route::get('patients/buscadores/{filtro}', 'App\Http\Controllers\PatientController@buscadores');
 Route::get('patients/document', 'App\Http\Controllers\PatientController@document');
 
 //Rutas para los odontólogos
@@ -44,6 +46,8 @@ Route::get('citas/create', 'App\Http\Controllers\AppointmentController@create')-
 Route::get('citas', 'App\Http\Controllers\AppointmentController@index')->name('citas.index');
 Route::post('citas', 'App\Http\Controllers\AppointmentController@store');
 Route::get('citas/tables', 'App\Http\Controllers\AppointmentController@tables');
+Route::get('citas/table', 'App\Http\Controllers\AppointmentController@table');
+Route::get('citas/table/{id}', 'App\Http\Controllers\AppointmentController@buscar');
 
 //Rutas para los pagos
 Route::get('documents', 'App\Http\Controllers\DocumentController@index')->name('documents.index');
@@ -56,6 +60,7 @@ Route::get('order','App\Http\Controllers\OrderPaymentController@index');
 Route::post('orders', 'App\Http\Controllers\OrderPaymentController@store');
 Route::get('order/create','App\Http\Controllers\OrderPaymentController@create');
 Route::get('orders/tables', 'App\Http\Controllers\OrderPaymentController@tables');
+Route::get('orders/time', 'App\Http\Controllers\OrderPaymentController@time');
 
 //Rutas para reportes
 
@@ -63,6 +68,7 @@ Route::get('Report','App\Http\Controllers\DocumentController@order')->name('repo
 Route::get('Report/orders/pdf', 'App\Http\Controllers\DocumentController@pdf')->name('reports.orders_pdf');
 Route::get('Report/cita','App\Http\Controllers\DocumentController@cita');
 Route::get('Report/citas','App\Http\Controllers\DocumentController@citas')->name('reports.citas');
+Route::get('Report/Cita/{fecha}/{fecha2}','App\Http\Controllers\AppointmentController@reports');
 
 
 //Rutas para horarios
@@ -78,7 +84,9 @@ Route::post('Historia/create/historia','App\Http\Controllers\ClinicHistoryContro
 Route::get('Historia/create/{id}','App\Http\Controllers\ClinicHistoryController@history')->name('historia_clinica.create');
 Route::get('Historia/patient/{id}','App\Http\Controllers\ClinicHistoryController@patient');
 Route::get('Historia/diagnostic/{id}','App\Http\Controllers\ClinicHistoryController@diagnostic');
+Route::get('Historia/busqueda','App\Http\Controllers\ClinicHistoryController@busqueda')->name('historia_clinica.busqueda');
 Route::get('Historia/tables','App\Http\Controllers\ClinicHistoryController@table');
+Route::get('Historia/patient','App\Http\Controllers\ClinicHistoryController@');
 
 //Rutas para servicios
 Route::get('Service/exchange_rate/{date}', 'App\Http\Controllers\ServiceController@exchangeRateTest');
