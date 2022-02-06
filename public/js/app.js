@@ -5259,6 +5259,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _item_items_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./item/items.vue */ "./resources/js/views/citas/item/items.vue");
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/vue-sweetalert.umd.js");
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5392,6 +5394,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     items: _item_items_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -5423,6 +5426,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.getRecords();
 
             case 4:
+              _context.next = 6;
+              return _this.getTime();
+
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -5456,22 +5463,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.$http.get("/".concat(this.resource, "/tables")).then(function (response) {
-        console.log(response);
         _this2.patient = response.data.customers;
         _this2.dentist = response.data.dentist;
       });
     },
-    addPayments: function addPayments() {
-      console.log("14785");
+    addPayments: function addPayments() {},
+    getTime: function getTime() {
+      this.time = moment__WEBPACK_IMPORTED_MODULE_3___default()().format('DD/MM/YYYY HH:mm:ss');
+      console.log(this.time);
     },
     ClickAddItem: function ClickAddItem() {
       this.showDialogPayments = true;
     },
     addRow: function addRow(row) {
       this.showDialogPayments = false;
-      console.log(row);
       this.form.item.push(JSON.parse(JSON.stringify(row)));
-      console.log(this.form.item);
       this.form.monto = this.form.monto + row.total;
     },
     submit: function submit() {
@@ -5486,21 +5492,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.orders.description = _this3.form.description;
                 _this3.orders.monto = _this3.form.monto;
                 _this3.loading_submit = true;
-                console.log(_this3.form);
-
-                _this3.saveOrder();
 
                 _this3.$http.post("/".concat(_this3.resource), _this3.form).then(function (response) {
                   console.log(response);
 
+                  _this3.saveOrder();
+
                   _this3.$swal("Registrado", "Se registrò la cita");
+
+                  _this3.ended();
 
                   _this3.close();
                 })["catch"](function (error) {
+                  _this3.$swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Verifique bien los datos'
+                  });
+
                   console.log(error);
                 });
 
-              case 7:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -5508,13 +5521,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
+    ended: function ended() {
+      this.end = moment__WEBPACK_IMPORTED_MODULE_3___default()().format('DD/MM/YYYY HH:mm:ss');
+      this.tiempo = moment__WEBPACK_IMPORTED_MODULE_3___default()(this.end).diff(moment__WEBPACK_IMPORTED_MODULE_3___default()(this.time), 'DD/MM/YYYY HH:mm:ss');
+      this.TiempoSegundos = this.tiempo / 1000;
+      console.log(this.end);
+      console.log(this.TiempoSegundos);
+    },
     saveOrder: function saveOrder() {
       this.$http.post("/orders", this.orders).then(function (response) {})["catch"](function (error) {
         console.log(error);
       });
     },
     close: function close() {
-      console.log("xddd");
       this.initForm();
     }
   }
@@ -7188,8 +7207,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -7218,6 +7235,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.getRecords();
 
             case 4:
+              _context.next = 6;
+              return _this.getTime();
+
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -7255,6 +7276,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this2.form = response.data;
       });
     },
+    getTime: function getTime() {
+      this.time = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('DD/MM/YYYY HH:mm:ss');
+      console.log(this.time);
+    },
     Nuevo: function Nuevo() {
       location.href = '/patients/create';
     },
@@ -7268,6 +7293,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.getRecords();
       }
+
+      this.end = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('DD/MM/YYYY HH:mm:ss');
+      this.tiempo = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.end).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()(this.time), 'DD/MM/YYYY HH:mm:ss');
+      this.TiempoSegundos = this.tiempo / 1000;
+      console.log(this.end);
+      console.log(this.TiempoSegundos);
     },
     busquedaDNI: function busquedaDNI() {
       var _this4 = this;
@@ -7279,6 +7310,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.getRecords();
       }
+
+      this.end = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('DD/MM/YYYY HH:mm:ss');
+      this.tiempo = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.end).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()(this.time), 'DD/MM/YYYY HH:mm:ss');
+      this.TiempoSegundos = this.tiempo / 1000;
+      console.log(this.end);
+      console.log(this.TiempoSegundos);
     },
     Aperturar: function Aperturar(patient) {
       var _this5 = this;
@@ -9366,7 +9403,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       resource: 'orders',
       errors: {},
       form: {},
-      time: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('LTS'),
       end: null,
       pickerOptionsDates: {
         disabledDate: function disabledDate(time) {
@@ -9418,6 +9454,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
     },
     getTime: function getTime() {
+      this.time = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('DD/MM/YYYY HH:mm:ss');
       console.log(this.time);
     },
     changePeriod: function changePeriod() {},
@@ -9429,12 +9466,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       this.$http.get("/".concat(this.resource, "/tables")).then(function (response) {
-        console.log(response);
         _this3.form = response.data;
       });
     },
     PDF: function PDF(type) {
-      this.end = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('LTS'), console.log(this.end);
+      this.end = moment__WEBPACK_IMPORTED_MODULE_1___default()().format('DD/MM/YYYY HH:mm:ss');
+      this.tiempo = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.end).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()(this.time), 'DD/MM/YYYY HH:mm:ss');
+      this.TiempoSegundos = this.tiempo / 1000;
+      console.log(this.end);
+      console.log(this.TiempoSegundos);
       window.open("/Report/".concat(this.resource, "/").concat(type), '_blank');
     }
   }
@@ -59430,73 +59470,77 @@ var render = function () {
                       _c(
                         "tbody",
                         _vm._l(_vm.form.patients, function (row, index) {
-                          return _c("tr", { attrs: { role: "row" } }, [
-                            _c("td", [_vm._v(_vm._s(index))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(row.name))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(row.number))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(row.telephone))]),
-                            _vm._v(" "),
-                            row.historia == 0
-                              ? _c("td", [
-                                  _c(
-                                    "div",
-                                    { staticClass: "form-button-action" },
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "btn btn-link btn-black btn-lg",
-                                          attrs: {
-                                            type: "button",
-                                            title: "Aperturar Historia",
-                                          },
-                                          on: {
-                                            click: function ($event) {
-                                              $event.preventDefault()
-                                              return _vm.Aperturar(row.id)
+                          return _c(
+                            "tr",
+                            { key: index, attrs: { role: "row" } },
+                            [
+                              _c("td", [_vm._v(_vm._s(index))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(row.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(row.number))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(row.telephone))]),
+                              _vm._v(" "),
+                              row.historia == 0
+                                ? _c("td", [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-button-action" },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-link btn-black btn-lg",
+                                            attrs: {
+                                              type: "button",
+                                              title: "Aperturar Historia",
+                                            },
+                                            on: {
+                                              click: function ($event) {
+                                                $event.preventDefault()
+                                                return _vm.Aperturar(row.id)
+                                              },
                                             },
                                           },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-id-card",
+                                              attrs: { "aria-hidden": "true" },
+                                            }),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                  ])
+                                : _c("td", [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-link btn-lg",
+                                        attrs: {
+                                          href: "#",
+                                          title: "Actualizar Historia",
+                                          "data-original-title": "Delete Task",
                                         },
-                                        [
-                                          _c("i", {
-                                            staticClass: "fa fa-id-card",
-                                            attrs: { "aria-hidden": "true" },
-                                          }),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                ])
-                              : _c("td", [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-link btn-lg",
-                                      attrs: {
-                                        href: "#",
-                                        title: "Actualizar Historia",
-                                        "data-original-title": "Delete Task",
-                                      },
-                                      on: {
-                                        click: function ($event) {
-                                          $event.preventDefault()
-                                          return _vm.Actualizar(row.id)
+                                        on: {
+                                          click: function ($event) {
+                                            $event.preventDefault()
+                                            return _vm.Actualizar(row.id)
+                                          },
                                         },
                                       },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fa fa-eye",
-                                        attrs: { "aria-hidden": "true" },
-                                      }),
-                                    ]
-                                  ),
-                                ]),
-                          ])
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-eye",
+                                          attrs: { "aria-hidden": "true" },
+                                        }),
+                                      ]
+                                    ),
+                                  ]),
+                            ]
+                          )
                         }),
                         0
                       ),

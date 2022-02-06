@@ -69,6 +69,7 @@ Route::get('Report/orders/pdf', 'App\Http\Controllers\DocumentController@pdf')->
 Route::get('Report/cita','App\Http\Controllers\DocumentController@cita');
 Route::get('Report/citas','App\Http\Controllers\DocumentController@citas')->name('reports.citas');
 Route::get('Report/Cita/{fecha}/{fecha2}','App\Http\Controllers\AppointmentController@reports');
+Route::get('Report/patients','App\Http\Controllers\AppointmentController@patients')->name('reports.patients');
 
 
 //Rutas para horarios

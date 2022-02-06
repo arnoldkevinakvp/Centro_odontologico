@@ -42,7 +42,6 @@
                                         <div class="form-group">
                                         <label>Busqueda</label>
                                         <input v-model="filtro" @input="busqueda" ref="inputQuantity" class="form-control">
-                                        </input>
                                         </div>
                                     </div>
                                 </template>
@@ -51,7 +50,6 @@
                                         <div class="form-group">
                                             <label>Busqueda</label>
                                             <input v-model="filtro2" @input="busquedaDNI" maxlength="8"  onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control">
-                                            </input>
                                         </div>
                                     </div>
                                 </template>
@@ -69,7 +67,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(row, index) in form.patients" role="row">
+                                            <tr v-for="(row, index) in form.patients" role="row" :key="index">
                                                 <td>{{index}}</td>
                                                 <td>{{row.name}}</td>
                                                 <td>{{row.number}}</td>
@@ -112,6 +110,7 @@ import moment from 'moment';
         async created() {
             await this.initForm()
             await this.getRecords()
+            await this.getTime()
         },
         methods:{
             initForm() {
@@ -141,6 +140,11 @@ import moment from 'moment';
                     this.form = response.data
                 });
             },
+            getTime(){
+                this.time = moment().format('DD/MM/YYYY HH:mm:ss')
+                
+                console.log(this.time)
+            },
             Nuevo(){
                 location.href = '/patients/create'
             },
@@ -153,6 +157,11 @@ import moment from 'moment';
                 else{
                     this.getRecords()
                 }
+                this.end =moment().format('DD/MM/YYYY HH:mm:ss')
+                this.tiempo = moment(this.end).diff(moment(this.time), 'DD/MM/YYYY HH:mm:ss')
+                this.TiempoSegundos = this.tiempo/1000
+                console.log(this.end)
+                console.log(this.TiempoSegundos)
                 
             },
             busquedaDNI(){
@@ -164,6 +173,11 @@ import moment from 'moment';
                 else{
                     this.getRecords()
                 }
+                this.end =moment().format('DD/MM/YYYY HH:mm:ss')
+                this.tiempo = moment(this.end).diff(moment(this.time), 'DD/MM/YYYY HH:mm:ss')
+                this.TiempoSegundos = this.tiempo/1000
+                console.log(this.end)
+                console.log(this.TiempoSegundos)
             },
             Aperturar(patient){
                 this.form2.FechaApertura = moment().format("DD/MM/YYYY");

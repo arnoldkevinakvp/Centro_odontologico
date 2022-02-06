@@ -36,7 +36,7 @@
                 <div class="content">
                     <div class="page-inner">
                         <div class="page-header">
-                            
+                            CITAS X MEDICOS ODONTOLOGOS
                         </div>
                     </div>
                     <div class="row">
@@ -44,6 +44,28 @@
                             <div class="card">
                                 <div class="card-header">
                                     <canvas id="myChart" ></canvas>
+                                </div>
+                                <div class="card-action">
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table  class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
+                                                <tbody>
+                                                    <tr role="row">
+                                                        <th>ESQUIVEL GUTIERREZ LOLA</th>
+                                                        <th>4</th>
+                                                    </tr>
+                                                    <tr role="row">
+                                                        <th>guerra avalos</th>
+                                                        <th>3</th>
+                                                    </tr>
+                                                    <tr role="row">
+                                                        <th>SEGURA PUMA LUIS ALBERTO</th>
+                                                        <th>2</th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -140,7 +140,6 @@
                 resource: 'orders',
                 errors: {},
                 form: {},
-                time : moment().format('LTS'),
                 end: null,
                 pickerOptionsDates: {
                     disabledDate: (time) => {
@@ -170,7 +169,9 @@
                 }
             },
             getTime(){
-               console.log(this.time)
+                this.time = moment().format('DD/MM/YYYY HH:mm:ss')
+                
+                console.log(this.time)
             },
             changePeriod(){
 
@@ -189,13 +190,15 @@
             },
             getRecords(){
                 this.$http.get(`/${this.resource}/tables`).then((response) => {
-                    console.log(response)
                     this.form = response.data
                 });
             },
             PDF(type){
-                this.end =moment().format('LTS'),
+                this.end =moment().format('DD/MM/YYYY HH:mm:ss')
+                this.tiempo = moment(this.end).diff(moment(this.time), 'DD/MM/YYYY HH:mm:ss')
+                this.TiempoSegundos = this.tiempo/1000
                 console.log(this.end)
+                console.log(this.TiempoSegundos)
                 window.open(`/Report/${this.resource}/${type}`, '_blank');
             },
         }

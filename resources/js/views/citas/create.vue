@@ -126,6 +126,8 @@
 <script>
     import items from './item/items.vue'
     import VueSweetalert2 from 'vue-sweetalert2';
+    import moment from 'moment';
+
     export default {
         components: {items},
         data(){
@@ -142,6 +144,7 @@
         async created() {
             await this.initForm()
             await this.getRecords()
+            await this.getTime()
         },
         methods: {
             initForm() {
@@ -168,13 +171,16 @@
             },
             getRecords(){
                 this.$http.get(`/${this.resource}/tables`).then((response) => {
-                    console.log(response)
                     this.patient = response.data.customers
                     this.dentist = response.data.dentist
                 });
             },
             addPayments(){
-                console.log("14785")
+            },
+            getTime(){
+                this.time = moment().format('DD/MM/YYYY HH:mm:ss')
+                
+                console.log(this.time)
             },
             ClickAddItem(){
                 
@@ -182,9 +188,7 @@
             },
             addRow(row){
                 this.showDialogPayments = false
-                console.log(row)
                 this.form.item.push(JSON.parse(JSON.stringify(row)));
-                console.log(this.form.item)
                 this.form.monto = this.form.monto + row.total
             },
             async submit() {
@@ -192,17 +196,29 @@
                 this.orders.description = this.form.description
                 this.orders.monto = this.form.monto
                 this.loading_submit = true
-                console.log(this.form)
-                this.saveOrder();
                 this.$http.post(`/${this.resource}`, this.form)
                     .then(response => {
                         console.log(response)
+                        this.saveOrder();
                         this.$swal("Registrado","Se registrò la cita")
+                        this.ended()
                         this.close()
                     })
                     .catch(error => {
+                        this.$swal({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Verifique bien los datos',
+                        })
                         console.log(error)
                     });
+            },
+            ended(){
+                this.end =moment().format('DD/MM/YYYY HH:mm:ss')
+                this.tiempo = moment(this.end).diff(moment(this.time), 'DD/MM/YYYY HH:mm:ss')
+                this.TiempoSegundos = this.tiempo/1000
+                console.log(this.end)
+                console.log(this.TiempoSegundos)
             },
             saveOrder(){
                 this.$http.post(`/orders`, this.orders)
@@ -213,7 +229,6 @@
                     });
             },
             close() {
-                console.log("xddd")
                 this.initForm()
             },
         }

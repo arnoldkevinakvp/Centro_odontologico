@@ -118,6 +118,10 @@ class AppointmentController extends Controller
     {
         //
     }
+    public function patients(){
+        return view('reports.patients');
+
+    }
 
     public function tables(){
         $customers = Patient::all();

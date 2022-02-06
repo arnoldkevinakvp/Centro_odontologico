@@ -206,7 +206,7 @@
 					<div class="collapse" id="Reportes">
 						<ul class="nav nav-collapse">
 							<li>
-								<a href="specialty.php">
+								<a href="{{route('reports.orders')}}">
 									<span class="sub-item">Pacientes</span>
 								</a>
 							</li>
@@ -225,6 +225,23 @@
 									<span class="sub-item">Citas</span>
 								</a>
 							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a data-toggle="collapse" href="#Manual">
+					<i class="fa fa-history"></i>
+						<p>Manual</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="Manual">
+						<ul class="nav nav-collapse">
+							<li>
+								<a href="{{route('reports.patients')}}">
+									<span class="sub-item">Mostrar</span>
+								</a>
+							</li>
+							
 						</ul>
 					</div>
 				</li>
