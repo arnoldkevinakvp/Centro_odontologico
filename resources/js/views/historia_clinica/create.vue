@@ -96,10 +96,9 @@
                 </template>
                 <template v-if="enabled_odontograma">
                     
-                        <div class="modal-dialog">                        
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-               
                                     <center><h4 class="modal-title" id="myModalLabel">Nuevo Registro</h4></center>
                                 </div>
                                 <div class="modal-body">

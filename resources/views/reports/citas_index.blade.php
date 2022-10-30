@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<report-patients></report-patients>
+<citas_index-index></citas_index-index>
 @endsection

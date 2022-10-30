@@ -12,6 +12,7 @@ use App\Models\Appointment;
 use App\Models\Currency_type;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Serie;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -44,6 +45,87 @@ class DocumentController extends Controller
         $records = Appointment::where('estado',0)->get();
         return compact('records');
     }
+    public function CitasIndex(){
+        return view('reports.citas_index');
+    }
+
+    public function dashboard(){
+
+        $appointment = Appointment::get();
+        $data_array = ['Ene', 'Feb','Mar', 'Abr','May', 'Jun','Jul', 'Ago','Sep', 'Oct', 'Nov', 'Dic'];
+        $total = $appointment->count();
+        $appointment_by_month = $appointment->groupBy(function($date) {
+            return Carbon::parse($date->date_of_treatment)->format('m');
+        });
+        
+        return [
+            'totals' => [
+                'total' => $total,
+            ],
+            'graph' => [
+                'labels' => $data_array,
+                'datasets' => [
+                    [
+                        'label' => 'Total Citas',
+                        'data' => $this->arrayAppointmentbyMonth($appointment_by_month),
+                        'backgroundColor' => 'rgb(255, 99, 132)',
+                        'borderColor' => 'rgb(255, 99, 132)',
+                        'borderWidth' => 1,
+                        'fill' => false,
+                        'lineTension' => 0,
+                    ],
+                ],
+            ]
+        ];
+    }
+    public function dashboard2(){
+
+        $appointment = Appointment::get();
+        $data_array = ['Ene', 'Feb','Mar', 'Abr','May', 'Jun','Jul', 'Ago','Sep', 'Oct', 'Nov', 'Dic'];
+        $total = $appointment->count();
+        $appointment_by_month = $appointment->groupBy(function($date) {
+            return Carbon::parse($date->date_of_treatment)->format('m');
+        });
+        return [
+            'totals' => [
+                'total_payment' => number_format(180,5),
+                'total_to_pay' => number_format(50),
+            ],
+            'graph' => [
+                'labels' => ['Total cobrado', 'Pendiente de cobro'],
+                'datasets' => [
+                    [
+                        'label' => 'Balance',
+                        'data' => [180.5, 50],
+                        'backgroundColor' => [
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 99, 132)',
+                        ]
+                    ]
+                ],
+            ]
+        ];
+        
+    }
+
+    private function arrayAppointmentbyMonth($appointment_by_month){
+
+        return [
+            isset($appointment_by_month['01']) ? 1 : 0,
+            isset($appointment_by_month['02']) ? 2 : 0,
+            isset($appointment_by_month['03']) ? 3 : 0,
+            isset($appointment_by_month['04']) ? 1 : 0,
+            isset($appointment_by_month['05']) ? 1 : 0,
+            isset($appointment_by_month['06']) ? 1 : 0,
+            isset($appointment_by_month['07']) ? 1 : 0,
+            isset($appointment_by_month['08']) ? 1 : 0,
+            isset($appointment_by_month['09']) ? 1 : 0,
+            isset($appointment_by_month['10']) ? 1 : 0,
+            isset($appointment_by_month['11']) ? 1 : 0,
+            isset($appointment_by_month['12']) ? 1 : 0
+        ];
+
+    }
 
     public function tables(){
         $customers = Patient::all();
@@ -63,6 +145,13 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         //
+    }
+    public function help(){
+        return view('help.index');
+    }
+
+    public function linea(){
+        return view('help.linea');
     }
 
     public function order(){

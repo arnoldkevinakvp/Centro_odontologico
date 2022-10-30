@@ -117,7 +117,53 @@
                                             <input v-model="form.email" name="email" type="text" class="form-control" required placeholder="Ingrese email">
                                         </div>
                                     </div>
-                                    
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Foto de Perfil
+                                            </label>
+                                            <input type="file" >
+                                                <!-- <el-upload slot="append"
+                                                        :headers="headers"
+                                                        action="/configurations/uploads"
+                                                        :show-file-list="false"
+                                                        :on-success="successUpload">
+                                                    <el-button type="primary" icon="el-icon-upload"></el-button>
+                                                </el-upload> -->
+                                            <!-- <div class="sub-title text-danger"><small>Se recomienda resoluciones 700x300</small></div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Imágen DNI reverso
+                                            </label>
+                                            <input type="file" >
+                                                <!-- <el-upload slot="append"
+                                                        :headers="headers"
+                                                        action="/configurations/uploads"
+                                                        :show-file-list="false"
+                                                        :on-success="successUpload">
+                                                    <el-button type="primary" icon="el-icon-upload"></el-button>
+                                                </el-upload> -->
+                                            <!-- <div class="sub-title text-danger"><small>Se recomienda resoluciones 700x300</small></div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Imágen DNI frontal
+                                            </label>
+                                            <input type="file" >
+                                                <!-- <el-upload slot="append"
+                                                        :headers="headers"
+                                                        action="/configurations/uploads"
+                                                        :show-file-list="false"
+                                                        :on-success="successUpload">
+                                                    <el-button type="primary" icon="el-icon-upload"></el-button>
+                                                </el-upload> -->
+                                            <!-- <div class="sub-title text-danger"><small>Se recomienda resoluciones 700x300</small></div> -->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-action">

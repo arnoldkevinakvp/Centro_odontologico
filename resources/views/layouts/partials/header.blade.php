@@ -137,7 +137,7 @@
 						<div class="dropdown-user-scroll scrollbar-outer">
 							<li>
 								<div class="user-box">
-									<div class="avatar-lg"><img src="Atlantis/img/mujer.png" alt="image profile" class="avatar-img rounded"></div>
+									<div class="avatar-lg"><img src="/Atlantis/img/mujer.png" alt="image profile" class="avatar-img rounded"></div>
 									<div class="u-text">
 										
 										<p class="text-muted">Customers</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>

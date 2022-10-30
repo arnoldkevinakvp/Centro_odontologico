@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<report-patients></report-patients>
+<help-linea></help-linea>
 @endsection

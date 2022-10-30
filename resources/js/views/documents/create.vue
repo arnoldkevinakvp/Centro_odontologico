@@ -144,15 +144,15 @@
                                             </template>
                                         </tbody>
                                         <tr>
-                                                <td></td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <button type="button" class="btn waves-effect waves-light btn-primary" data-toggle="modal" data-target="#exampleModal"  @click.prevent="ClickAddItem">
-                                                            + Buscar Pagos
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr> 
+                                            <td></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <button type="button" class="btn waves-effect waves-light btn-primary" data-toggle="modal" data-target="#exampleModal"  @click.prevent="ClickAddItem">
+                                                        + Buscar Pagos
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </div>
                                 </div>
                             </div>
@@ -357,21 +357,23 @@
             },
             async submit() {
                 this.loading_submit = true
-                await this.$http.post(`/${this.resource}`, this.form)
-                    .then(response => {
-                        if (response.data.success) {
-                            this.$message.success(response.data.message)
-                            this.close()
-                        } else {
-                            this.$message.error(response.data.message)
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                    .then(() => {
-                        this.loading_submit = false
-                    })
+                // await this.$http.post(`/${this.resource}`, this.form)
+                //     .then(response => {
+                //         if (response.data.success) {
+                //             this.$message.success(response.data.message)
+                //             this.close()
+                //         } else {
+                //             this.$message.error(response.data.message)
+                //         }
+                //     })
+                //     .catch(error => {
+                //         console.log(error)
+                //     })
+                //     .then(() => {
+                //         this.loading_submit = false
+                //     })
+                this.$swal("Pago registrado")
+                this.initForm()
             },
             close() {
                 this.initForm()

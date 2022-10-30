@@ -70,6 +70,7 @@ Route::get('Report/cita','App\Http\Controllers\DocumentController@cita');
 Route::get('Report/citas','App\Http\Controllers\DocumentController@citas')->name('reports.citas');
 Route::get('Report/Cita/{fecha}/{fecha2}','App\Http\Controllers\AppointmentController@reports');
 Route::get('Report/patients','App\Http\Controllers\AppointmentController@patients')->name('reports.patients');
+Route::get('Report/citas/index','App\Http\Controllers\DocumentController@CitasIndex')->name('reports.citas_index');
 
 
 //Rutas para horarios
@@ -99,3 +100,11 @@ Route::get('Items/create', 'App\Http\Controllers\ItemController@create')->name('
 Route::get('Items/table', 'App\Http\Controllers\ItemController@table');
 Route::get('Items/tables', 'App\Http\Controllers\ItemController@tables');
 Route::post('Items', 'App\Http\Controllers\ItemController@store');
+
+//Ruta para items
+Route::get('Helps','App\Http\Controllers\DocumentController@help')->name('help.index');
+Route::get('Linea','App\Http\Controllers\DocumentController@linea')->name('help.linea');
+
+//Rutas para dashboard
+Route::get('dashboard/tables','App\Http\Controllers\DocumentController@dashboard');
+Route::get('dashboard/tables2','App\Http\Controllers\DocumentController@dashboard2');

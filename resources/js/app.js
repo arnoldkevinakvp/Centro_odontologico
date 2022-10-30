@@ -14,9 +14,13 @@
  Vue.use(VueSweetalert2);
  
  import "sweetalert2/dist/sweetalert2.min.css"
+
  Vue.prototype.$eventHub = new Vue()
  Vue.prototype.$http = Axios
  
+ 
+Vue.component('x-graph', require('./components/graph/Graph.vue').default);
+Vue.component('x-graph-line', require('./components/graph/GraphLine.vue').default);
  //Vistas para pacientes
  Vue.component('patients-index', require('./views/patients/index.vue').default);
  Vue.component('patients-create', require('./views/patients/create.vue').default);
@@ -39,6 +43,8 @@
  
  //Vistas para reportes
  Vue.component('report_orders-index', require('./views/reportes/Orders_index.vue').default);
+ Vue.component('citas_index-index', require('./views/reportes/citas_index.vue').default);
+ Vue.component('report-patients', require('./views/reportes/patients.vue').default);
 
   
  //Vistas para historia clínica
@@ -53,6 +59,10 @@
   //Vistas para items
   Vue.component('items-index', require('./views/items/index.vue').default);
   Vue.component('items-create', require('./views/items/create.vue').default);
+
+  //Vistas para ayuda en lìnea
+  Vue.component('help-index', require('./views/help/index.vue').default);
+  Vue.component('help-linea', require('./views/help/linea.vue').default);
 
  const app = new Vue({
      el: '#main-wrapper'

@@ -45,7 +45,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(row, index) in form.items" role="row">
+                                            <tr v-for="(row, index) in form.items" :key="index" role="row">
                                                 <td>{{index}}</td>
                                                 <td>{{row.unit_type_id}}</td>
                                                 <td>{{row.name}}</td>

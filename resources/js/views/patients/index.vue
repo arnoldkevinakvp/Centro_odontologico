@@ -52,6 +52,7 @@
                                                 <th>Dirección</th>
                                                 <th>Teléfono</th>
                                                 <th>Email</th>
+                                                <th>Perfil</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>
@@ -63,17 +64,19 @@
                                                 <th>Dirección</th>
                                                 <th>Teléfono</th>
                                                 <th>Email</th>
+                                                <th>Perfil</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </tfoot>                                                                        
                                         <tbody>
-                                            <tr v-for="(row, index) in form.patients" role="row">
+                                            <tr v-for="(row, index) in form.patients" :key="index" role="row">
                                                 <td>{{index}}</td>
                                                 <td>{{row.name}}</td>
                                                 <td>{{row.number}}</td>
                                                 <td>{{row.address}}</td>
                                                 <td>{{row.telephone}}</td>
                                                 <td>{{row.email}}</td>
+                                                <td><button @click.prevent="Ver(row.id)" href="#" class="btn btn-link btn-lg" title="Ver perfil" data-original-title="Delete Task"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
                                                 <td><div class="form-button-action">
 				                                    <a href="#" title="Editar" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
 													<button href="#" class="btn btn-link btn-danger btn-lg" title="" data-original-title="Delete Task"><i class="fa fa-times"></i></button>
@@ -126,6 +129,10 @@
             },
             Nuevo(){
                 location.href = '/patients/create'
+            },
+            Ver(patient){
+                console.log(patient)
+                location.href = `/Historia/create/${patient}`
             },
         }
     }

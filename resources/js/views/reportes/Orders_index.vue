@@ -131,9 +131,11 @@
 </template>
 <script>
     import moment from 'moment'
-    
+    import LoaderGraph from "../../components/loaders/l-graph.vue";
+    import queryString from "query-string";
 
     export default {
+        components: { LoaderGraph },
         data(){
             return{
                 loading_submit: false,
@@ -147,11 +149,16 @@
                         return this.form.date_start > time
                     }
                 },
+                sale_note: {
+                    totals: {},
+                    graph: {}
+                },
             }
         },
         async created() {
             await this.initForm()
             await this.getRecords()
+            await this.getDashboard()
             await this.getTime()
         },
         methods:{
@@ -191,6 +198,12 @@
             getRecords(){
                 this.$http.get(`/${this.resource}/tables`).then((response) => {
                     this.form = response.data
+                });
+            },
+            getDashboard(){
+                this.$http.get('/dashboard/tables').then((response)=>{
+                    console.log(response)
+                    this.sale_note = response.data;
                 });
             },
             PDF(type){

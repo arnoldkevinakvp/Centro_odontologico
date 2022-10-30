@@ -4,7 +4,7 @@
 		<div class="sidebar-content">
 			<div class="user">
 				<div class="avatar-sm float-left mr-2">
-					<img src="Atlantis/img/mujer.png" alt="..." class="avatar-img rounded-circle">
+					<img src="/Atlantis/img/mujer.png" alt="..." class="avatar-img rounded-circle">
 				</div>
 				<div class="info">
 					<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -206,12 +206,12 @@
 					<div class="collapse" id="Reportes">
 						<ul class="nav nav-collapse">
 							<li>
-								<a href="{{route('reports.orders')}}">
+								<a href="{{route('reports.patients')}}">
 									<span class="sub-item">Pacientes</span>
 								</a>
 							</li>
 							<li>
-								<a href="specialty.php">
+								<a href="{{route('reports.citas_index')}}">
 									<span class="sub-item">Médico-Odontólogo</span>
 								</a>
 							</li>
@@ -237,11 +237,15 @@
 					<div class="collapse" id="Manual">
 						<ul class="nav nav-collapse">
 							<li>
-								<a href="{{route('reports.patients')}}">
+								<a href="{{route('help.index')}}">
 									<span class="sub-item">Mostrar</span>
 								</a>
 							</li>
-							
+							<li>
+								<a href="{{route('help.linea')}}">
+									<span class="sub-item">Ayuda en Línea</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>
@@ -254,7 +258,7 @@
 					<div class="collapse" id="Historial">
 						<ul class="nav nav-collapse">
 							<li>
-								<a href="specialty.php">
+								<a href="{{route('reports.citas_index')}}">
 									<span class="sub-item">Mostrar</span>
 								</a>
 							</li>
